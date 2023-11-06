@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red39\green129\blue201;\red0\green0\blue0;\red255\green255\blue255;
+\red255\green255\blue255;\red20\green152\blue106;\red235\green16\blue47;\red212\green20\blue102;}
+{\*\expandedcolortbl;;\cssrgb\c18039\c58431\c82745;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c100000\c100000\c100000\c50196;\cssrgb\c0\c65098\c49020;\cssrgb\c94902\c17255\c23922;\cssrgb\c87451\c18824\c47451;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww34060\viewh20740\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import\cf4 \strokec4  openai\
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \strokec5 # Initialize the OpenAI API client\cf4 \strokec4 \
+openai.api_key = \cf6 \strokec6 "YOUR_OPENAI_API_KEY"\cf4 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \strokec2 class\cf4 \strokec4  \cf7 \strokec7 BlogPost\cf4 \strokec4 (models.Model):\
+    \cf5 \strokec5 # Fields for storing blog post information\cf4 \strokec4 \
+    title = models.CharField(max_length=\cf8 \strokec8 100\cf4 \strokec4 )\
+    keyword = models.CharField(max_length=\cf8 \strokec8 100\cf4 \strokec4 )\
+    content = models.TextField()\
+    date_published = models.DateTimeField(auto_now_add=\cf2 \strokec2 True\cf4 \strokec4 )\
+    \
+    \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 generate_content\cf4 \strokec4 (self):\
+        \cf5 \strokec5 # Use the OpenAI API to generate content for the blog post\cf4 \strokec4 \
+        response = openai.Completion.create(\
+            engine=\cf6 \strokec6 "text-davinci-002"\cf4 \strokec4 ,\
+            prompt=\cf6 \strokec6 f"Write a blog post about \{self.keyword\} that includes SEO optimization tips"\cf4 \strokec4 ,\
+            max_tokens=\cf8 \strokec8 1000\cf4 \strokec4 ,\
+            n=\cf8 \strokec8 1\cf4 \strokec4 ,\
+            stop=\cf2 \strokec2 None\cf4 \strokec4 ,\
+            temperature=\cf8 \strokec8 0.5\cf4 \strokec4 ,\
+        )\
+\
+        \cf5 \strokec5 # Store the generated content in the content field\cf4 \strokec4 \
+        generated_content = response[\cf6 \strokec6 "choices"\cf4 \strokec4 ][\cf8 \strokec8 0\cf4 \strokec4 ][\cf6 \strokec6 "text"\cf4 \strokec4 ]\
+        \
+        \cf5 \strokec5 # Modify the generated content to include keywords and other SEO optimization tips\cf4 \strokec4 \
+        modified_content = self.optimize_for_seo(generated_content)\
+        self.content = modified_content\
+    \
+    \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 optimize_for_seo\cf4 \strokec4 (self, content):\
+        \cf5 \strokec5 # Add keyword to the beginning of the title\cf4 \strokec4 \
+        optimized_title = \cf6 \strokec6 f"\{self.keyword\} - \{self.title\}"\cf4 \strokec4 \
+        \
+        \cf5 \strokec5 # Add keyword to the first and last sentences of the content\cf4 \strokec4 \
+        content_lines = content.split(\cf6 \strokec6 "\\n"\cf4 \strokec4 )\
+        optimized_content = \cf6 \strokec6 f"\{self.keyword\}: \{content_lines[\cf8 \strokec8 0\cf6 \strokec6 ]\}\\n"\cf4 \strokec4 \
+        \cf2 \strokec2 for\cf4 \strokec4  line \cf2 \strokec2 in\cf4 \strokec4  content_lines[\cf8 \strokec8 1\cf4 \strokec4 :-\cf8 \strokec8 1\cf4 \strokec4 ]:\
+            optimized_content += \cf6 \strokec6 f"\{line\}\\n"\cf4 \strokec4 \
+        optimized_content += \cf6 \strokec6 f"\{content_lines[-\cf8 \strokec8 1\cf6 \strokec6 ]\} - \{self.keyword\}"\cf4 \strokec4 \
+        \
+        \cf5 \strokec5 # Add meta description with the keyword\cf4 \strokec4 \
+        optimized_meta_description = \cf6 \strokec6 f"\{self.keyword\}: \{self.title\}"\cf4 \strokec4 \
+        \
+        \cf5 \strokec5 # Return the optimized content\cf4 \strokec4 \
+        \cf2 \strokec2 return\cf4 \strokec4  \cf6 \strokec6 f"Title: \{optimized_title\}\\n\\nContent:\\n\{optimized_content\}\\n\\nMeta Description:\\n\{optimized_meta_description\}"\cf4 \strokec4 \
+    \
+    \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 get_headings\cf4 \strokec4 (self):\
+        \cf5 \strokec5 # Split the content into lines\cf4 \strokec4 \
+        content_lines = self.content.split(\cf6 \strokec6 "\\n"\cf4 \strokec4 )\
+        \
+        \cf5 \strokec5 # Find all lines that start with "Heading:"\cf4 \strokec4 \
+        headings = [line.replace(\cf6 \strokec6 "Heading:"\cf4 \strokec4 , \cf6 \strokec6 ""\cf4 \strokec4 ).strip() \cf2 \strokec2 for\cf4 \strokec4  line \cf2 \strokec2 in\cf4 \strokec4  content_lines \cf2 \strokec2 if\cf4 \strokec4  line.startswith(\cf6 \strokec6 "Heading:"\cf4 \strokec4 )]\
+        \
+        \cf2 \strokec2 return\cf4 \strokec4  headings}
