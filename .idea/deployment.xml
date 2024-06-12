@@ -2,7 +2,11 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+<<<<<<< HEAD
       <paths name="ishareinvest">
+=======
+      <paths name="ubuntu@18.139.232.194:22 key">
+>>>>>>> origin/main
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
