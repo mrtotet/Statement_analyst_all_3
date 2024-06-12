@@ -1,0 +1,8 @@
+https://finance.vietstock.vn/truy-xuat-du-lieu/tong-hop-doanh-nghiep.htm
+acc: đăng nhập bằng google buituichay@gmail.com
+vào template lưu sẵn để lấy dữ liệu quý cuối hoặc năm cuối
+Thêm cột lấy giá cuối quý
+Tải lưu file excel về và xử lý file excel
+Thêm 3 cột Year, Quarter, Year_Q với mẫu 2024, 1, 2024Q1
+Copy head column từ quỹ cũ qua để xóa tiêu đề chưa năm quý của file mới
+Xóa 5 hàng thừa ở đầu, và các thông tin ở cuối sheet
