@@ -1,6 +1,11 @@
 https://finance.vietstock.vn/truy-xuat-du-lieu/tong-hop-doanh-nghiep.htm
 acc: đăng nhập bằng google buituichay@gmail.com
-vào template lưu sẵn để lấy dữ liệu quý cuối hoặc năm cuối
+chọn ngôn ngữ tiếng anh
+vào template lưu sẵn để lấy dữ liệu:
+Vào Saved template chon HSX_HNX_upcom_1610_ma_cp
+Vao Norm chon Joinstock company, income Statement
+Rieng CF chon sau vy CF data của viietstock chi o Q1, 6 thang, 9 thang, và year
+Chỉ lấy indirect CF
 Thêm cột lấy giá cuối quý
 Tải lưu file excel về và xử lý file excel
 Thêm 3 cột Year, Quarter, Year_Q với mẫu 2024, 1, 2024Q1
